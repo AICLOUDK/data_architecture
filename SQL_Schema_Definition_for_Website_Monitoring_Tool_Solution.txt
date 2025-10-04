@@ -1,0 +1,23 @@
+-- Fact Table
+CREATE TABLE Fact_WebsiteMonitoring (
+    FactID SERIAL PRIMARY KEY,
+    PageViews INT NOT NULL,
+    UniqueVisitors INT NOT NULL,
+    BounceRate DECIMAL(5,2),
+    Date DATE NOT NULL
+);
+
+-- Dimension Tables
+CREATE TABLE Dim_Page (
+    PageID SERIAL PRIMARY KEY,
+    URL VARCHAR(255),
+    PageType VARCHAR(50)
+);
+
+CREATE TABLE Dim_Time (
+    TimeID SERIAL PRIMARY KEY,
+    Date DATE,
+    DayOfWeek VARCHAR(10),
+    Month VARCHAR(20),
+    Year INT
+);

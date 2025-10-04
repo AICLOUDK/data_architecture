@@ -1,0 +1,49 @@
+-- Customers table
+CREATE TABLE Customers (
+    CustomerID SERIAL PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) UNIQUE NOT NULL,
+    Phone VARCHAR(15),
+    Address TEXT
+);
+
+-- Products table
+CREATE TABLE Products (
+    ProductID SERIAL PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Description TEXT,
+    Price DECIMAL(10,2) NOT NULL,
+    Category VARCHAR(50)
+);
+
+-- Inventory table
+CREATE TABLE Inventory (
+    InventoryID SERIAL PRIMARY KEY,
+    ProductID INT REFERENCES Products(ProductID),
+    Quantity INT NOT NULL,
+    WarehouseLocation VARCHAR(50)
+);
+
+-- Suppliers table
+CREATE TABLE Suppliers (
+    SupplierID SERIAL PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    ContactInfo TEXT
+);
+
+-- Orders table
+CREATE TABLE Orders (
+    OrderID SERIAL PRIMARY KEY,
+    CustomerID INT REFERENCES Customers(CustomerID),
+    OrderDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    TotalAmount DECIMAL(10,2)
+);
+
+-- OrderDetails table (many-to-many)
+CREATE TABLE OrderDetails (
+    OrderDetailID SERIAL PRIMARY KEY,
+    OrderID INT REFERENCES Orders(OrderID),
+    ProductID INT REFERENCES Products(ProductID),
+    Quantity INT NOT NULL,
+    PriceAtPurchase DECIMAL(10,2)
+);

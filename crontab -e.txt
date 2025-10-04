@@ -1,0 +1,1 @@
+0 23 * * * /path/to/exercise_4_mysql_backup.sh
